@@ -10,7 +10,7 @@ import time
 class SmileTaskTestCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.ip = 'http://localhost:3000'
+        cls.ip = 'http://106.14.172.174:3000'
         url = cls.ip + "/login"
         payload = {
             "username": "username",
