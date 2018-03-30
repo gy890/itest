@@ -5,7 +5,7 @@ import json
 import time
 
 
-# import BSTestRunner
+import BSTestRunner
 
 class SmileTaskTestCase(unittest.TestCase):
     @classmethod
@@ -115,5 +115,5 @@ class SmileTaskTestCase(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
-    # BSTestRunner.main()
+    #unittest.main()
+    BSTestRunner.main()
