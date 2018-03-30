@@ -9,7 +9,7 @@ import BSTestRunner
 
 class SmileTaskTestCase(unittest.TestCase):
     def setUp(self):
-        self.ip = 'http://localhost:3000'
+        self.ip = 'http://106.14.172.174:3000'
         self.token = self.login()
 
     def login(self):
