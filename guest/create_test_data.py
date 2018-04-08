@@ -2,7 +2,7 @@
 '''
 创建嘉宾表（sign_guest）测试数据。
 '''
-f = open("guests.txt", 'w')
+f = open("guests.txt", 'w', encoding='utf-8')
 
 for i in range(1, 3001):
     id = str(i)
