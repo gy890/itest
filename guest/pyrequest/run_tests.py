@@ -1,4 +1,4 @@
-import time, sys
+import time
 
 import unittest
 from guest.pyrequest.HTMLTestRunner import HTMLTestRunner

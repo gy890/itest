@@ -5,8 +5,6 @@ import json
 import time
 
 
-import BSTestRunner
-
 class SmileTaskTestCase(unittest.TestCase):
     def setUp(self):
         self.ip = 'http://106.14.172.174:3000'
@@ -117,11 +115,7 @@ class SmileTaskTestCase(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    # unittest.main()
-
     suite1 = unittest.TestLoader().loadTestsFromTestCase(SmileTaskTestCase)
     suite = unittest.TestSuite([suite1, ])
     runner = unittest.TextTestRunner(verbosity=2)
     runner.run(suite)
-
-    # BSTestRunner.main()

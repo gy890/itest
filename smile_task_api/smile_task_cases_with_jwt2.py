@@ -3,9 +3,8 @@ import unittest
 import requests
 import json
 import time
-
-
 import BSTestRunner
+
 
 class SmileTaskTestCase(unittest.TestCase):
     @classmethod
@@ -24,6 +23,9 @@ class SmileTaskTestCase(unittest.TestCase):
     def header_with_auth(self):
         return {'Authorization': 'Bearer ' + SmileTaskTestCase.token, 'content-type': 'application/json'}
 
+    def tearDown(self):
+        print(self.res)
+
     def test_get_all_tasks(self):
         create_task_res = self.create_task('test', 'desc')
         new_id = create_task_res['id']
@@ -31,20 +33,20 @@ class SmileTaskTestCase(unittest.TestCase):
         url = SmileTaskTestCase.ip + "/api/tasks"
         response = requests.request("GET", url, headers=self.header_with_auth)
 
-        res = response.json()
-        self.assertNotEqual(res, [])
-        self.assertEqual(len(res), 1)
+        self.res = response.json()
+        self.assertNotEqual(self.res, [])
+        self.assertEqual(len(self.res), 1)
 
         self.delete_task(new_id)
 
     def test_create_task(self):
         title = 'test ' + str(time.time())
-        res = self.create_task(title, 'desc')
+        self.res = self.create_task(title, 'desc')
 
-        self.assertNotEqual(res, {})
-        self.assertEqual(res['title'], title)
+        self.assertNotEqual(self.res, {})
+        self.assertEqual(self.res['title'], title)
 
-        self.delete_task(res['id'])
+        self.delete_task(self.res['id'])
 
     def test_get_task_by_id(self):
         create_task_res = self.create_task('test', 'desc')
@@ -52,8 +54,8 @@ class SmileTaskTestCase(unittest.TestCase):
 
         # get by id
         url_for_get_by_id = SmileTaskTestCase.ip + '/api/tasks/' + str(new_id)
-        res = requests.request("GET", url_for_get_by_id, headers=self.header_with_auth).json()
-        self.assertEqual(res['id'], new_id)
+        self.res = requests.request("GET", url_for_get_by_id, headers=self.header_with_auth).json()
+        self.assertEqual(self.res['id'], new_id)
 
         self.delete_task(new_id)
 
@@ -62,10 +64,10 @@ class SmileTaskTestCase(unittest.TestCase):
         new_id = create_task_res['id']
 
         url_for_complete_task = SmileTaskTestCase.ip + '/api/tasks/' + str(new_id)
-        res = requests.request("PUT", url_for_complete_task, headers=self.header_with_auth).json()
+        self.res = requests.request("PUT", url_for_complete_task, headers=self.header_with_auth).json()
 
-        self.assertEqual(res['id'], new_id)
-        self.assertEqual(res['done'], True)
+        self.assertEqual(self.res['id'], new_id)
+        self.assertEqual(self.res['done'], True)
 
         self.delete_task(new_id)
 
@@ -74,8 +76,8 @@ class SmileTaskTestCase(unittest.TestCase):
         new_id = create_task_res['id']
 
         url_for_delete_task = SmileTaskTestCase.ip + '/api/tasks/' + str(new_id)
-        res = requests.request("DELETE", url_for_delete_task, headers=self.header_with_auth).json()
-        self.assertEqual(res['id'], str(new_id))
+        self.res = requests.request("DELETE", url_for_delete_task, headers=self.header_with_auth).json()
+        self.assertEqual(self.res['id'], str(new_id))
 
     def create_task(self, title, desc):
         url = SmileTaskTestCase.ip + "/api/tasks"
@@ -115,5 +117,5 @@ class SmileTaskTestCase(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    #unittest.main()
+    # unittest.main()
     BSTestRunner.main()
