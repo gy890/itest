@@ -41,7 +41,7 @@ class SmileTaskTestCase(unittest.TestCase):
 
     def test_create_task(self):
         title = 'test ' + str(time.time())
-        self.res = self.create_task(title, 'desc')
+        self.res = self.create_task(title, '中文desc')
 
         self.assertNotEqual(self.res, {})
         self.assertEqual(self.res['title'], title)
