@@ -111,7 +111,10 @@ class OutputRedirector(object):
         self.fp = fp
 
     def write(self, s):
-        self.fp.write(to_unicode(s))
+        try:
+            self.fp.write(to_unicode(s))
+        except NameError as e:
+            self.fp.write(s)
 
     def writelines(self, lines):
         lines = map(to_unicode, lines)
