@@ -2,7 +2,7 @@
 
 - 安装 intelliBot 插件
 - 配置运行方式 Settings - Tools - External Tools
-  ```
+  ```
   $pybot.bat -d results test_if.robot
   $pybot.bat -d results -t testpost ./
   ```
@@ -13,7 +13,6 @@
     $FileDir$
     ```
     [](http://ot7pupwhi.bkt.clouddn.com/18-4-13/53722325.jpg)
-
   - 设置case
     ```
     Robot Run SingleTestCase
