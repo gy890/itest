@@ -4,9 +4,9 @@ Library    Collections
 
 *** Test Cases ***
 testget
-    ${payload}=    Create Dictionary    eid=1
+    ${payload}    Create Dictionary    eid=1
     Create Session    event    http://106.14.172.174:8089/api
-    ${r}=    Get Request    event    /get_event_list/    params=${payload}
+    ${r}    Get Request    event    /get_event_list/    params=${payload}
     Should Be Equal As Strings    ${r.status_code}    200
     log    ${r.json()}
     ${dict}    Set variable    ${r.json()}
@@ -19,8 +19,8 @@ testget
 
 testpost
     Create Session    event    http://106.14.172.174:8089/api
-    &{headers}    Create Dictionary    Content-Type=application/x-www-form-urlencoded
-    &{payload}=    Create Dictionary    eid=1
+    ${headers}    Create Dictionary    Content-Type=application/x-www-form-urlencoded
+    ${payload}    Create Dictionary    eid=1
     ${r}=    Post Request    event    /add_event/    data=${payload}    headers=${headers}
     Should Be Equal As Strings    ${r.status_code}    200
     log    ${r.json()}
